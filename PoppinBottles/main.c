@@ -12,13 +12,19 @@ int bottlesAfterRecyling(int totalRecycledPops, int bottlesSum, int capsSum);
 int const costOfOneBottleCop = 2;
 
 int main(int argc, const char * argv[]) {
-    int moneyPaid = 10;
-    int boughtPops = moneyPaid / costOfOneBottleCop;
-    int totalRecycledPops = 0;
-    int bottlesSum = boughtPops;
-    int capsSum = boughtPops;
-    totalRecycledPops = bottlesAfterRecyling(totalRecycledPops, bottlesSum, capsSum);
-    printf("Total recycled bottles: %d\n", totalRecycledPops);
+    int moneyPaid;
+    do {
+        printf("How much are you going to spend?\n");
+        scanf("%d", &moneyPaid);
+        int boughtPops = moneyPaid / costOfOneBottleCop;
+        int totalRecycledPops = 0;
+        int bottlesSum = boughtPops;
+        int capsSum = boughtPops;
+        totalRecycledPops = bottlesAfterRecyling(totalRecycledPops, bottlesSum, capsSum);
+        printf("Total recycled bottles: %d\n", totalRecycledPops);
+        printf("---Next Customer---\n");
+    } while (moneyPaid);
+    
     return 0;
 }
 
