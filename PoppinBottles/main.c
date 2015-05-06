@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 
-int bottlesAfterRecyling(int totalRecycledPops, int bottlesSum, int capsSum);
+int bottlesAfterRecyling(int totalRecycledPopsByBottles, int totalRecycledPopsByCaps, int bottlesSum, int capsSum);
 int const costOfOneBottleCop = 2;
 
 int main(int argc, const char * argv[]) {
@@ -17,10 +17,17 @@ int main(int argc, const char * argv[]) {
         printf("How much are you going to spend?\n");
         scanf("%d", &moneyPaid);
         int boughtPops = moneyPaid / costOfOneBottleCop;
+        printf("You purchased %d bottles of Pops.\n", boughtPops);
+        
         int totalRecycledPops = 0;
+        int totalRecycledPopsByBottles = 0;
+        int totalRecycledPopsByCaps = 0;
+        
         int bottlesSum = boughtPops;
         int capsSum = boughtPops;
-        totalRecycledPops = bottlesAfterRecyling(totalRecycledPops, bottlesSum, capsSum);
+        
+        totalRecycledPops = bottlesAfterRecyling(totalRecycledPopsByBottles, totalRecycledPopsByCaps, bottlesSum, capsSum);
+        
         printf("Total recycled bottles: %d\n", totalRecycledPops);
         printf("---Next Customer---\n");
     } while (moneyPaid);
@@ -28,7 +35,7 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 
-int bottlesAfterRecyling(int totalRecycledPops, int bottlesSum, int capsSum) {
+int bottlesAfterRecyling(int totalRecycledPopsByBottles, int totalRecycledPopsByCaps, int bottlesSum, int capsSum) {
     int numberRecyledByBottles = bottlesSum / 2;
     int numberRecyledByCaps = capsSum / 4;
     
@@ -39,14 +46,15 @@ int bottlesAfterRecyling(int totalRecycledPops, int bottlesSum, int capsSum) {
     
     bottlesSum = numberOfBottlesLeft + bottlesRecyled;
     capsSum = numberOfCapsLeft + bottlesRecyled;
-    totalRecycledPops += bottlesRecyled;
-    printf("totalRecycles - %d\n", totalRecycledPops);
-    printf("bottlesSum - %d\n", bottlesSum);
-    printf("capsSum - %d\n", capsSum);
-    printf("------\n");
+    
+    totalRecycledPopsByBottles += numberRecyledByBottles;
+    totalRecycledPopsByCaps += numberRecyledByCaps;
+    
     if (bottlesSum < 2 && capsSum < 4) {
-        return totalRecycledPops;
+        printf("Pops obtained through bottles recycling - %d\n", totalRecycledPopsByBottles);
+        printf("Pops obtained through caps recycling - %d\n", totalRecycledPopsByCaps);
+        return totalRecycledPopsByBottles + totalRecycledPopsByCaps;
     } else {
-        return bottlesAfterRecyling(totalRecycledPops, bottlesSum, capsSum);
+        return bottlesAfterRecyling(totalRecycledPopsByBottles, totalRecycledPopsByCaps, bottlesSum, capsSum);
     }
 }
