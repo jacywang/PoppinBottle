@@ -16,6 +16,14 @@ int main(int argc, const char * argv[]) {
     do {
         printf("How much are you going to spend?\n");
         scanf("%d", &moneyPaid);
+        if (moneyPaid < 2) {
+            printf("Each bottle of Pop cost $2. Get more money and come back.\n");
+            continue;
+        } else if (moneyPaid == 2 | moneyPaid == 3) {
+            printf("You only bought buy one bottle of Pop. Buy more to get recycling!\n");
+            continue;
+        }
+        
         int boughtPops = moneyPaid / costOfOneBottleCop;
         printf("You purchased %d bottles of Pops.\n", boughtPops);
         
